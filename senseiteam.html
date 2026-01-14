@@ -1,105 +1,769 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sensei Team Software</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Süpürge Servis - İzmir Buca</title>
+<link rel="icon" type="image/jpeg" href="image/icon.jpeg">
+<link rel="shortcut icon" type="image/jpeg" href="image/icon.jpeg">
+<link rel="apple-touch-icon" href="image/icon.jpeg">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --secondary: #06b6d4;
+  --dark: #0f172a;
+  --dark-light: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #8b5cf6;
+  --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-    <!-- Renk Tanımı -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              sensei: '#00FFC2',
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body class="bg-black text-white font-sans">
-    <!-- Navbar -->
-    <nav class="flex items-center justify-between px-10 py-6 bg-black/60 backdrop-blur-md sticky top-0 z-50 border-b border-neutral-800 shadow-md">
-      <h1 class="text-3xl font-bold text-sensei">Sensei Team</h1>
-      <div class="space-x-8 hidden md:flex text-sm">
-        <a href="#app" class="hover:text-sensei transition">Uygulamamız</a>
-        <a href="#about" class="hover:text-sensei transition">Hakkımızda</a>
-        <a href="#contact" class="hover:text-sensei transition">İletişim</a>
-        <a
-          href="https://play.google.com/store/apps/details?id=com.SenseiTeamSoftware.SenseiAi"
-          target="_blank"
-          class="bg-sensei text-black px-5 py-2 rounded-xl font-semibold hover:bg-[#00e6af] transition"
-        >
-          Uygulamayı İndir
-        </a>
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-header {
+  display: flex;
+  gap: 1rem;
+}
+
+.contact-header a {
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.contact-header a:first-child {
+  background: var(--primary);
+  color: white;
+}
+
+.contact-header a:first-child:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+}
+
+.contact-header a:nth-child(2) {
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
+}
+
+.contact-header a:nth-child(2):hover {
+  background: var(--secondary);
+  color: var(--dark);
+  transform: translateY(-2px);
+}
+
+.contact-header a:nth-child(3) {
+  background: var(--gradient);
+  color: white;
+}
+
+.contact-header a:nth-child(3):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+/* Hero Section */
+.hero {
+  margin-top: 80px;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background: var(--gradient);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.6);
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Video Section */
+.video-section {
+  background: var(--dark-light);
+  padding: 4rem 0;
+}
+
+.video-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.video-container {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.video-placeholder video {
+  width: 100%;
+  display: block;
+}
+
+.video-image {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.video-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gallery */
+.gallery-section {
+  background: var(--dark);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--dark-light);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.3));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.gallery-item:hover::before {
+  opacity: 1;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
+  border-color: var(--primary);
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+  transform: scale(1.1);
+}
+
+.video-item::after {
+  content: '▶';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: white;
+  z-index: 2;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.video-item:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lightbox-content img,
+.lightbox-content video {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 25px 100px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close:hover {
+  background: var(--primary);
+  transform: rotate(90deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-header {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-header a {
+    text-align: center;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .lightbox-close {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Location Section */
+.location-section {
+  background: var(--dark-light);
+  padding: 4rem 0;
+}
+
+.location-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.location-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.location-item:hover {
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateX(10px);
+  border-color: var(--primary);
+}
+
+.location-icon {
+  font-size: 2rem;
+  color: var(--primary);
+  min-width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 50%;
+}
+
+.location-details h3 {
+  color: var(--text);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.location-details p {
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.map-container {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  height: 500px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Scroll animations */
+@media (prefers-reduced-motion: no-preference) {
+  .gallery-item {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .gallery-item:nth-child(n) {
+    animation-delay: calc(0.05s * var(--i, 1));
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive for location */
+@media (max-width: 968px) {
+  .location-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-container {
+    height: 400px;
+  }
+  
+  .video-content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <div class="logo"> Robot Süpürge Servis</div>
+    <div class="contact-header">
+      <a href="tel:+905549917720">📞 0554 991 77 20</a>
+      <a href="https://wa.me/905549917720">💬 WhatsApp</a>
+      <a href="#iletisim">📧 İletişim</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Robot Süpürge Servisi</h1>
+  <p>İzmir Buca'da Güvenilir ve Hızlı Tamir</p>
+  <a href="#iletisim" class="cta-button">İletişime Geçin</a>
+</section>
+
+<section class="video-section">
+  <div class="container">
+    <h2 class="section-title">Tanıtım Videosu</h2>
+    <div class="video-content">
+      <div class="video-container">
+        <div class="video-placeholder">
+          <video controls autoplay muted loop>
+            <source src="image/23.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-    </nav>
-
-    <!-- Hero -->
-    <section class="px-10 py-24 grid md:grid-cols-2 gap-16 items-center">
-      <div>
-        <h2 class="text-5xl font-extrabold leading-tight mb-6">
-          Geleceğin Eğitim<br />Uygulamalarıyla Tanışın
-        </h2>
-        <p class="text-lg text-neutral-300 mb-6 max-w-md">
-          Sensei Team Software ile teknoloji ve eğitimi bir araya getiriyoruz.
-          Yapay zeka destekli uygulamamızla öğrenme deneyiminizi bir üst seviyeye taşıyoruz.
-        </p>
-        <a
-          href="https://play.google.com/store/apps/details?id=com.SenseiTeamSoftware.SenseiAi"
-          target="_blank"
-          class="inline-block bg-sensei text-black px-6 py-3 rounded-xl font-semibold shadow hover:bg-[#00e6af] transition"
-        >
-          Play Store’dan İndir
-        </a>
+      <div class="video-image">
+        <img src="image/7.jpeg" alt="Robot Süpürge Servisi">
       </div>
-      <div>
-        <img
-          src="https://play-lh.googleusercontent.com/4w0Qly4GzL3pnvfFRkX5F-rsbw1sRsY4bj81HOoe_YcJTbfxdwiMW_24pl7bbnog58Q=w480-h960-rw"
-          alt="Sensei AI App"
-          class="rounded-3xl shadow-2xl border-2 border-sensei/30 w-72 mx-auto"
-        />
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section" id="galeri">
+  <div class="container">
+    <h2 class="section-title">Galeri - Çalışmalarımız</h2>
+    <div class="gallery-grid">
+      <!-- Resimler 1-22 -->
+      <div class="gallery-item" data-src="image/1.jpeg" data-type="image" style="--i: 1">
+        <img src="image/1.jpeg" alt="Robot Süpürge Tamiri 1" loading="lazy">
       </div>
-    </section>
-
-    <!-- Özellikler -->
-    <section id="app" class="px-10 py-24 bg-neutral-950">
-      <h3 class="text-4xl font-bold mb-12 text-center">Uygulama Özellikleri</h3>
-      <div class="grid md:grid-cols-4 gap-8 text-center">
-        <div class="bg-neutral-900 p-8 rounded-2xl shadow hover:scale-105 transition hover:shadow-lg border border-sensei/30">Yapay Zeka Destekli</div>
-        <div class="bg-neutral-900 p-8 rounded-2xl shadow hover:scale-105 transition hover:shadow-lg border border-sensei/30">Öğrenme Odaklı Arayüz</div>
-        <div class="bg-neutral-900 p-8 rounded-2xl shadow hover:scale-105 transition hover:shadow-lg border border-sensei/30">Modern Tasarım</div>
-        <div class="bg-neutral-900 p-8 rounded-2xl shadow hover:scale-105 transition hover:shadow-lg border border-sensei/30">Gelişim Takibi</div>
+      <div class="gallery-item" data-src="image/2.jpeg" data-type="image" style="--i: 2">
+        <img src="image/2.jpeg" alt="Robot Süpürge Tamiri 2" loading="lazy">
       </div>
-    </section>
-
-    <!-- Hakkımızda -->
-    <section id="about" class="px-10 py-24 bg-black">
-      <h3 class="text-4xl font-bold mb-6">Hakkımızda</h3>
-      <p class="text-neutral-300 max-w-3xl leading-relaxed">
-        Sensei Team Software olarak, eğitim teknolojileri alanında yenilikçi çözümler sunmak için yola çıktık.
-        Amacımız, öğrenmeyi herkes için daha erişilebilir, daha verimli ve daha eğlenceli hale getirmek.
-        Sensei AI, bu vizyonun ilk adımıdır.
-      </p>
-    </section>
-
-    <!-- İletişim -->
-    <section id="contact" class="px-10 py-24 bg-neutral-950">
-      <h3 class="text-4xl font-bold mb-10">İletişim</h3>
-      <div class="space-y-6 text-lg text-neutral-300">
-        <p><strong class="text-sensei">📧</strong> info@senseiteam.com</p>
-        <p><strong class="text-sensei">📞</strong> +90 555 555 55 55</p>
-        <p><strong class="text-sensei">💻</strong> github.com/senseiteam</p>
+      <div class="gallery-item" data-src="image/3.jpeg" data-type="image" style="--i: 3">
+        <img src="image/3.jpeg" alt="Robot Süpürge Tamiri 3" loading="lazy">
       </div>
-    </section>
+      <div class="gallery-item" data-src="image/4.jpeg" data-type="image" style="--i: 4">
+        <img src="image/4.jpeg" alt="Robot Süpürge Tamiri 4" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/5.jpeg" data-type="image" style="--i: 5">
+        <img src="image/5.jpeg" alt="Robot Süpürge Tamiri 5" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/6.jpeg" data-type="image" style="--i: 6">
+        <img src="image/6.jpeg" alt="Robot Süpürge Tamiri 6" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/7.jpeg" data-type="image" style="--i: 7">
+        <img src="image/7.jpeg" alt="Robot Süpürge Tamiri 7" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/8.jpeg" data-type="image" style="--i: 8">
+        <img src="image/8.jpeg" alt="Robot Süpürge Tamiri 8" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/9.jpeg" data-type="image" style="--i: 9">
+        <img src="image/9.jpeg" alt="Robot Süpürge Tamiri 9" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/10.jpeg" data-type="image" style="--i: 10">
+        <img src="image/10.jpeg" alt="Robot Süpürge Tamiri 10" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/11.jpeg" data-type="image" style="--i: 11">
+        <img src="image/11.jpeg" alt="Robot Süpürge Tamiri 11" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/12.jpeg" data-type="image" style="--i: 12">
+        <img src="image/12.jpeg" alt="Robot Süpürge Tamiri 12" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/13.jpeg" data-type="image" style="--i: 13">
+        <img src="image/13.jpeg" alt="Robot Süpürge Tamiri 13" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/14.jpeg" data-type="image" style="--i: 14">
+        <img src="image/14.jpeg" alt="Robot Süpürge Tamiri 14" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/15.jpeg" data-type="image" style="--i: 15">
+        <img src="image/15.jpeg" alt="Robot Süpürge Tamiri 15" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/16.jpeg" data-type="image" style="--i: 16">
+        <img src="image/16.jpeg" alt="Robot Süpürge Tamiri 16" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/17.jpeg" data-type="image" style="--i: 17">
+        <img src="image/17.jpeg" alt="Robot Süpürge Tamiri 17" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/18.jpeg" data-type="image" style="--i: 18">
+        <img src="image/18.jpeg" alt="Robot Süpürge Tamiri 18" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/19.jpeg" data-type="image" style="--i: 19">
+        <img src="image/19.jpeg" alt="Robot Süpürge Tamiri 19" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/20.jpeg" data-type="image" style="--i: 20">
+        <img src="image/20.jpeg" alt="Robot Süpürge Tamiri 20" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/21.jpeg" data-type="image" style="--i: 21">
+        <img src="image/21.jpeg" alt="Robot Süpürge Tamiri 21" loading="lazy">
+      </div>
+      <div class="gallery-item" data-src="image/22.jpeg" data-type="image" style="--i: 22">
+        <img src="image/22.jpeg" alt="Robot Süpürge Tamiri 22" loading="lazy">
+      </div>
+      
+      <!-- Videolar 23-40 -->
+      <div class="gallery-item video-item" data-src="image/23.mp4" data-type="video" style="--i: 23">
+        <video muted preload="metadata">
+          <source src="image/23.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/24.mp4" data-type="video" style="--i: 24">
+        <video muted preload="metadata">
+          <source src="image/24.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/25.mp4" data-type="video" style="--i: 25">
+        <video muted preload="metadata">
+          <source src="image/25.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/26.mp4" data-type="video" style="--i: 26">
+        <video muted preload="metadata">
+          <source src="image/26.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/27.mp4" data-type="video" style="--i: 27">
+        <video muted preload="metadata">
+          <source src="image/27.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/28.mp4" data-type="video" style="--i: 28">
+        <video muted preload="metadata">
+          <source src="image/28.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/29.mp4" data-type="video" style="--i: 29">
+        <video muted preload="metadata">
+          <source src="image/29.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/30.mp4" data-type="video" style="--i: 30">
+        <video muted preload="metadata">
+          <source src="image/30.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/31.mp4" data-type="video" style="--i: 31">
+        <video muted preload="metadata">
+          <source src="image/31.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/32.mp4" data-type="video" style="--i: 32">
+        <video muted preload="metadata">
+          <source src="image/32.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/33.mp4" data-type="video" style="--i: 33">
+        <video muted preload="metadata">
+          <source src="image/33.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/34.mp4" data-type="video" style="--i: 34">
+        <video muted preload="metadata">
+          <source src="image/34.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/35.mp4" data-type="video" style="--i: 35">
+        <video muted preload="metadata">
+          <source src="image/35.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/36.mp4" data-type="video" style="--i: 36">
+        <video muted preload="metadata">
+          <source src="image/36.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/37.mp4" data-type="video" style="--i: 37">
+        <video muted preload="metadata">
+          <source src="image/37.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/38.mp4" data-type="video" style="--i: 38">
+        <video muted preload="metadata">
+          <source src="image/38.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/39.mp4" data-type="video" style="--i: 39">
+        <video muted preload="metadata">
+          <source src="image/39.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="gallery-item video-item" data-src="image/40.mp4" data-type="video" style="--i: 40">
+        <video muted preload="metadata">
+          <source src="image/40.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="text-center text-sm py-6 text-neutral-500 bg-black border-t border-neutral-800">
-      © 2025 Sensei Team Software. Tüm hakları saklıdır.
-    </footer>
-  </body>
-</html>
+<section class="location-section" id="iletisim">
+  <div class="container">
+    <h2 class="section-title">Adresimiz</h2>
+    <div class="location-content">
+      <div class="location-info">
+        <div class="location-item">
+          <div class="location-icon">📍</div>
+          <div class="location-details">
+            <h3>Adres</h3>
+            <p>Hürriyet Mahallesi, Mehmet Akif Cad. No:61/B<br>Buca, İzmir</p>
+          </div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-icon">📞</div>
+          <div class="location-details">
+            <h3>Telefon</h3>
+            <p><a href="tel:+905549917720" style="color: var(--secondary); text-decoration: none;">0554 991 77 20</a></p>
+          </div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-icon">💬</div>
+          <div class="location-details">
+            <h3>WhatsApp</h3>
+            <p><a href="https://wa.me/+905549917720" style="color: var(--secondary); text-decoration: none;">Hemen Mesaj Gönderin</a></p>
+          </div>
+        </div>
+        
+        <div class="location-item">
+          <div class="location-icon">🕐</div>
+          <div class="location-details">
+            <h3>Çalışma Saatleri</h3>
+            <p>Pazartesi - Cumartesi: 09:00 - 19:00<br>Pazar: Randevulu</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3127.8446879817944!2d27.175!
